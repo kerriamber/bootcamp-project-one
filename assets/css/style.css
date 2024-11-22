@@ -1,0 +1,11 @@
+#calendar tr td {
+    padding: 20px;
+}
+
+#calendar tr td {
+    border: 1px solid #000;
+}
+
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
