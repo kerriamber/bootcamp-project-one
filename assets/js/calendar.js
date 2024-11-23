@@ -52,6 +52,9 @@ function renderCalendar(monthIndex, year) {
 
     // Loop through each cell in the calendar and render the date
     calendarDays.forEach((day) => {
+        // Clear the contents of the cell
+        day.innerHTML = "";
+
         if (date.getMonth() !== monthIndex) {
             // If the date is not in the current month, we need to style it differently
             day.classList.remove("active-month");
