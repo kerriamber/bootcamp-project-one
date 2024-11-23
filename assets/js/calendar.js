@@ -23,9 +23,64 @@ const DAYS = [
     'Saturday'
 ];
 
+const ONE_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 const calendar = document.getElementById("calendar");
 
+const prevButton = document.getElementById("calendar-prev");
+const nextButton = document.getElementById("calendar-next");
+const monthHeader = document.getElementById("current-month");
+
 function renderCalendar(monthIndex, year) {
-    const monthHeader = document.getElementById("current-month");
-    
+    const calendarDays = calendar.querySelectorAll(".calendar-row td");
+    const firstMonthDay = new Date(year, monthIndex, 1);
+    monthHeader.dataset.month = monthIndex;
+    monthHeader.dataset.year = year;
+    let firstDayOnCalendar;
+
+    if (firstMonthDay.getDay() === 0) {
+        firstDayOnCalendar = firstMonthDay;
+    } else {
+        firstDayOnCalendar = new Date(year, monthIndex, 1 - firstMonthDay.getDay());
+    }
+
+    let date = new Date(firstDayOnCalendar);
+
+    calendarDays.forEach((day) => {
+        if (date.getMonth() !== monthIndex) {
+            day.classList.add("inactive");
+        } else {
+            day.classList.remove("inactive");
+        }
+
+        day.innerText = date.getUTCDate();
+        date = new Date(date.getTime() + ONE_DAY_IN_MILLISECONDS);
+    });
+
+    monthHeader.innerText = `${MONTHS[monthIndex]} ${year}`;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date();
+    renderCalendar(today.getMonth(), today.getFullYear());
+});
+
+prevButton.addEventListener("click", () => {
+    let month = parseInt(monthHeader.dataset.month);
+    let year = parseInt(monthHeader.dataset.year);
+    
+    if (month === 0) {
+        renderCalendar(11, year - 1);
+    } else {
+        renderCalendar(month - 1, year);
+    }
+});
+
+nextButton.addEventListener("click", () => {
+    let month = parseInt(monthHeader.dataset.month);
+    let year = parseInt(monthHeader.dataset.year);
+    if (month === 11) {
+        renderCalendar(0, year + 1);
+    } else {
+        renderCalendar(month + 1, year);
+    }
+});
