@@ -2,7 +2,16 @@
     text-align: center;
 }
 
-#calendar tr td {
+#calendar-header, #calendar-days th, .calendar-row td {
+    border: 4px solid #000;
+}
+
+#calendar-header, #calendar-days {
+    background-color: #000;
+    color: #fff;
+}
+
+.calendar-row td {
     width: 100px;
     height: 100px;
     font-weight: bolder;
@@ -10,7 +19,7 @@
     position: relative;
 }
 
-#calendar tr td:hover {
+.calendar-row td:hover {
     background-color: #00f;
 }
 
@@ -29,8 +38,4 @@
     padding: 10px;
     border-bottom: 4px solid #000;
     border-right: 4px solid #000;
-}
-
-#calendar-days th, #calendar-header {
-    border: 4px solid #000;
 }
