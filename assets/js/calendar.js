@@ -54,7 +54,7 @@ function renderCalendar(monthIndex, year) {
             day.classList.add("active-month");
         }
 
-        day.innerText = date.getUTCDate();
+        day.innerHTML = `<span class='calendar-date'>${date.getUTCDate()}</span>`;
         date = new Date(date.getTime() + ONE_DAY_IN_MILLISECONDS);
     });
 
