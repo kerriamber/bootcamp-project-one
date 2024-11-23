@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-#calendar tr td /*, #calendar tr:not(:first-child) th */ {
+#calendar tr td {
     width: 100px;
     height: 100px;
     font-weight: bolder;
@@ -10,11 +10,15 @@
     position: relative;
 }
 
-#calendar tr td.inactive-month {
+#calendar tr td:hover {
+    background-color: #00f;
+}
+
+.inactive-month {
     color: #f00;
 }
 
-#calendar tr td.active-month {
+.active-month {
     color: #0f0;
 }
 
@@ -25,4 +29,8 @@
     padding: 10px;
     border-bottom: 4px solid #000;
     border-right: 4px solid #000;
+}
+
+#calendar-days th, #calendar-header {
+    border: 4px solid #000;
 }

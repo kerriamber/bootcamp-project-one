@@ -51,26 +51,30 @@ function renderCalendar(monthIndex, year) {
     let date = new Date(firstDayOnCalendar);
 
     // Loop through each cell in the calendar and render the date
-    calendarDays.forEach((day) => {
+    calendarDays.forEach((dayCell) => {
         // Clear the contents of the cell
-        day.innerHTML = "";
-
-        if (date.getMonth() !== monthIndex) {
-            // If the date is not in the current month, we need to style it differently
-            day.classList.remove("active-month");
-            day.classList.add("inactive-month");
-        } else {
-            day.classList.remove("inactive-month");
-            day.classList.add("active-month");
-        }
+        dayCell.innerHTML = "";
 
         const dateSpan = document.createElement("span");
         dateSpan.classList.add("calendar-date");
-        // hacky but I love ternary operators
-        const dayOfMonth = date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : date.getUTCDate();
-        dateSpan.innerText = dayOfMonth;
-        
-        day.appendChild(dateSpan);
+
+        // If the date is from the previous month, we need to style it a bit differently so it's apparent which month it belongs to
+        if (date.getMonth() !== monthIndex) {
+            dateSpan.classList.add("inactive-month");
+        } else {
+            dateSpan.classList.add("active-month");
+        }
+
+        // Pad the date with a leading zero if necessary (because it looks nicer [and I hate CSS])
+        let currentDate;
+        if (date.getUTCDate() < 10) {
+            currentDate = `0${date.getUTCDate()}`;
+        } else {
+            currentDate = date.getUTCDate();
+        }
+        dateSpan.innerText = currentDate;
+
+        dayCell.appendChild(dateSpan);
 
         // Technically, I guess this could open up some HTML injection stuff, so I guess it's better to use document.createElement and appendChild as I did above
         // day.innerHTML = `<span class='calendar-date'>${date.getUTCDate()}</span>`;
