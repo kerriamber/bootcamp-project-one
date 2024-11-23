@@ -67,7 +67,7 @@ function renderCalendar(monthIndex, year) {
         dateSpan.innerText = date.getUTCDate();
         day.appendChild(dateSpan);
 
-        // Technically, I guess this could open up some HTML injection stuff, so I guess it's better to use document.createElement and appendChild likr I did above
+        // Technically, I guess this could open up some HTML injection stuff, so I guess it's better to use document.createElement and appendChild as I did above
         // day.innerHTML = `<span class='calendar-date'>${date.getUTCDate()}</span>`;
 
         // Increment the date by one day
