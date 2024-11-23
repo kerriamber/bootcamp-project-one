@@ -7,6 +7,7 @@
     height: 100px;
     font-weight: bolder;
     background-color: gray;
+    position: relative;
 }
 
 #calendar tr td.inactive-month {
@@ -15,4 +16,13 @@
 
 #calendar tr td.active-month {
     color: #0f0;
+}
+
+.calendar-date {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
 }
