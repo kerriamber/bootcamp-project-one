@@ -47,9 +47,11 @@ function renderCalendar(monthIndex, year) {
 
     calendarDays.forEach((day) => {
         if (date.getMonth() !== monthIndex) {
-            day.classList.add("inactive");
+            day.classList.remove("active-month");
+            day.classList.add("inactive-month");
         } else {
-            day.classList.remove("inactive");
+            day.classList.remove("inactive-month");
+            day.classList.add("active-month");
         }
 
         day.innerText = date.getUTCDate();

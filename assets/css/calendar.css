@@ -5,8 +5,14 @@
 #calendar tr td /*, #calendar tr:not(:first-child) th */ {
     width: 100px;
     height: 100px;
+    font-weight: bolder;
+    background-color: gray;
 }
 
-#calendar tr td.inactive {
-    color: grey;
+#calendar tr td.inactive-month {
+    color: #f00;
+}
+
+#calendar tr td.active-month {
+    color: #0f0;
 }
