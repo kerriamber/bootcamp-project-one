@@ -1,0 +1,8 @@
+#calendar {
+    text-align: center;
+}
+
+#calendar tr td /*, #calendar tr:not(:first-child) th */ {
+    width: 100px;
+    height: 100px;
+}

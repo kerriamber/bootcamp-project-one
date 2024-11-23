@@ -22,3 +22,10 @@ const DAYS = [
     'Friday',
     'Saturday'
 ];
+
+const calendar = document.getElementById("calendar");
+
+function renderCalendar(monthIndex, year) {
+    const monthHeader = document.getElementById("current-month");
+    
+}
