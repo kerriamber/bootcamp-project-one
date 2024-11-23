@@ -66,8 +66,10 @@ function renderCalendar(monthIndex, year) {
 
         const dateSpan = document.createElement("span");
         dateSpan.classList.add("calendar-date");
-        // I'm not sure if getUTCDate is perfect to use, especially on page load close to 00:00Z, but just using getDate will screw up thanks to daylight savings time
-        dateSpan.innerText = date.getUTCDate();
+        // hacky but I love ternary operators
+        const dayOfMonth = date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : date.getUTCDate();
+        dateSpan.innerText = dayOfMonth;
+        
         day.appendChild(dateSpan);
 
         // Technically, I guess this could open up some HTML injection stuff, so I guess it's better to use document.createElement and appendChild as I did above
@@ -88,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 prevButton.addEventListener("click", () => {
     let month = parseInt(monthHeader.dataset.month);
     let year = parseInt(monthHeader.dataset.year);
-    
+
     // If the currently displayed month is January, we need to go back to December of the previous year
     if (month === 0) {
         renderCalendar(11, year - 1);
