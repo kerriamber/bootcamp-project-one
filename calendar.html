@@ -86,16 +86,26 @@
         </tr>
     </table>
 
-    <section id="add-event">
-        <button class="new-events" type="button">
-        </button>
-    </section>
-    <section id="daily-events">
-        <ul>
-
-        </ul>
-
-    </section>
+    <div class="container"></div>
+        <div class="events"></div>
+        <div class="event">
+            <button id="eventBtn">Add Event</button>
+            <div id="eventModal" class="modal">
+                <div class="event-content">
+                    <span class="close">&times;</span>
+                    <h2>Add Event</h2>
+                    </div>
+                    <div class="event-body">
+                        <input type="text" class="form-control" placeholder="Event Title">
+                    </div>
+                    <div class="event-time row">
+                        <div class="col">
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="col">
+                            <input type="time" class="form-control">
+                        </div> 
+    </div>
 </body>
 
 </html>
