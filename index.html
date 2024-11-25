@@ -86,16 +86,27 @@
         </tr>
     </table>
 
-    <section id="add-event">
-        <button class="new-events" type="button">
-        </button>
-    </section>
-    <section id="daily-events">
-        <ul>
-
-        </ul>
-
-    </section>
+    <div class="container">
+        <div class="events"></div>
+        <div class="event">
+            <button id="eventBtn">Add Event</button>
+            <div id="eventModal" class="modal">
+                <div class="event-content">
+                    <div class="event-header">
+                        <h3>Event Title</h3>
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="event-body">
+                        <input type="text" class="form-control" placeholder="Event Title">
+                    </div>
+                    <div class="event-time row">
+                        <div class="col">
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="col">
+                            <input type="time" class="form-control">
+                        </div> 
+    </div>
 </body>
 
 </html>

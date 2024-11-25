@@ -21,6 +21,9 @@ const calendar = document.getElementById("calendar");
 const prevButton = document.getElementById("calendar-prev");
 const nextButton = document.getElementById("calendar-next");
 const monthHeader = document.getElementById("current-month");
+const eventModal = document.getElementById("eventModal");
+const addEventBtn = document.getElementById("eventBtn");
+const addEventSpan = document.getElementsByClassName("close")[0];
 
 /**
  * Renders dates for the calender for the given month and year
@@ -114,3 +117,14 @@ nextButton.addEventListener("click", () => {
         renderCalendar(month + 1, year);
     }
 });
+
+//function to add event
+addEventBtn.addEventListener("click", () => {
+    eventModal.style.display = "block";
+});
+
+//function to close event modal
+addEventSpan.addEventListener("click", () => {
+    eventModal.style.display = "none";
+});
+
