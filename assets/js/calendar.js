@@ -23,7 +23,7 @@ const nextButton = document.getElementById("calendar-next");
 const monthHeader = document.getElementById("current-month");
 const eventModal = document.getElementById("eventModal");
 const addEventBtn = document.getElementById("eventBtn");
-const addEventSpan = document.getElementsByClassName("close")[0];
+const modalCloseBtn = document.getElementById("modal-close-btn");
 
 /**
  * Renders dates for the calender for the given month and year
@@ -124,7 +124,10 @@ addEventBtn.addEventListener("click", () => {
 });
 
 //function to close event modal
-addEventSpan.addEventListener("click", () => {
+modalCloseBtn.addEventListener("click", () => {
     eventModal.style.display = "none";
+    document.getElementById("event-type").value = "";
+    document.getElementById("event-date").value = "";
+    document.getElementById("event-time").value = "";
 });
 
