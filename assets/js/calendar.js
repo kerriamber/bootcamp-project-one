@@ -24,6 +24,9 @@ const monthHeader = document.getElementById("current-month");
 const eventModal = document.getElementById("eventModal");
 const addEventBtn = document.getElementById("eventBtn");
 const modalCloseBtn = document.getElementById("modal-close-btn");
+const calendarDays = calendar.querySelectorAll(".calendar-row td");
+
+const today = new Date();
 
 /**
  * Renders dates for the calender for the given month and year
@@ -31,7 +34,6 @@ const modalCloseBtn = document.getElementById("modal-close-btn");
  * @param {Number} year the year of the month to render
  */
 function renderCalendar(monthIndex, year) {
-    const calendarDays = calendar.querySelectorAll(".calendar-row td");
     const firstMonthDay = new Date(year, monthIndex, 1);
 
     // Add data attributes to the header to keep track of the currently displayed month and year
@@ -40,14 +42,15 @@ function renderCalendar(monthIndex, year) {
 
     monthHeader.innerText = `${MONTHS[monthIndex]} ${year}`;
 
-    let firstDayOnCalendar;
+    let firstDayOnCalendar,
+        currentDayAlreadySelected = false; // so we don't add .current-day to multiple cells
 
     if (firstMonthDay.getDay() === 0) {
         // If the first day of the month is a Sunday, we don't need to render the previous month
         firstDayOnCalendar = firstMonthDay;
     } else {
         // If the first day of the month is not a Sunday, we need to render some days the previous month
-        // JS's Date class is nice because if you pass in a negative number for the day, it will go back to the previous month
+        // JS's Date class is nice because if you pass in a negative number for the date, it will go back to the previous month
         firstDayOnCalendar = new Date(year, monthIndex, 1 - firstMonthDay.getDay());
     }
 
@@ -58,14 +61,51 @@ function renderCalendar(monthIndex, year) {
         // Clear the contents of the cell
         dayCell.innerHTML = "";
 
+        // clear .current-day if it's there, since we're rendering the calendar again
+        if (dayCell.classList.contains("current-day")) {
+            dayCell.classList.remove("current-day");
+        }
+
         const dateSpan = document.createElement("span");
         dateSpan.classList.add("calendar-date");
 
-        // If the date is from the previous month, we need to style it a bit differently so it's apparent which month it belongs to
+        // If the date is from the previous or next month, we need to style it a bit differently
+        // so it's apparent it's not part of the current month
         if (date.getMonth() !== monthIndex) {
             dateSpan.classList.add("inactive-month");
         } else {
             dateSpan.classList.add("active-month");
+        }
+
+        const IS_TODAY = date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear();
+
+        const IS_FIRST_OF_MONTH = date.getDate() === 1;
+
+        /*
+         * I could almost certainly have better names for these two constants,
+         * but as we know, there are two hard things in computer science:
+         * - cache invalidation
+         * - naming things
+         * - off-by-one errors.
+         * So I'm just going to leave these as they are for now.
+         */
+        const IS_FIRST_OF_CURRENT_MONTH_BUT_NOT_CURRENT_YEAR = IS_FIRST_OF_MONTH &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() !== today.getFullYear();
+
+        const IS_FIRST_OF_MONTH_TO_DISPLAY = IS_FIRST_OF_MONTH &&
+            date.getMonth() === monthIndex &&
+            date.getMonth() != today.getMonth();
+
+        const shouldPreselectDay = IS_TODAY ||
+            IS_FIRST_OF_CURRENT_MONTH_BUT_NOT_CURRENT_YEAR ||
+            IS_FIRST_OF_MONTH_TO_DISPLAY;
+
+        if (shouldPreselectDay && !currentDayAlreadySelected) {
+            currentDayAlreadySelected = true; // don't add .current-day to any other cells
+            dayCell.classList.add("current-day");
         }
 
         // Pad the date with a leading zero if necessary (because it looks nicer [and I hate CSS])
@@ -79,9 +119,6 @@ function renderCalendar(monthIndex, year) {
 
         dayCell.appendChild(dateSpan);
 
-        // Technically, I guess this could open up some HTML injection stuff, so I guess it's better to use document.createElement and appendChild as I did above
-        // day.innerHTML = `<span class='calendar-date'>${date.getUTCDate()}</span>`;
-
         // Increment the date by one day
         date = new Date(date.getTime() + ONE_DAY_IN_MILLISECONDS);
     });
@@ -89,7 +126,6 @@ function renderCalendar(monthIndex, year) {
 
 // Render the calendar when the page loads
 document.addEventListener("DOMContentLoaded", () => {
-    const today = new Date();
     renderCalendar(today.getMonth(), today.getFullYear());
 });
 
@@ -116,6 +152,23 @@ nextButton.addEventListener("click", () => {
     } else { // Otherwise, we just go forward one month
         renderCalendar(month + 1, year);
     }
+});
+
+calendarDays.forEach((dayCell) => {
+    /*
+     * We can't use an arrow function here because we need `this` to refer to the element that was clicked
+     * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#cannot_be_used_as_methods
+     */
+    dayCell.addEventListener("click", function () {
+        const currentlySelectedDay = calendar.querySelector(".current-day");
+
+        // currentlySelectedDay should never be null, but guard against it just in case
+        if (currentlySelectedDay) {
+            currentlySelectedDay.classList.remove("current-day");
+        }
+
+        this.classList.add("current-day");
+    });
 });
 
 //function to add event
