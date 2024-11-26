@@ -24,87 +24,98 @@
 </head>
 
 <body>
-    <table id="calendar">
-        <tr id="calendar-header">
-            <th><button id="calendar-prev" class="btn btn-primary">&lt;</button></th>
-            <th id="current-month" colspan="5">Month 20XX</th>
-            <th><button id="calendar-next" class="btn btn-primary">&gt;</button></th>
-        </tr>
-        <tr id="calendar-days">
-            <th>Sun</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-        </tr>
-        <tr class="calendar-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr class="calendar-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr class="calendar-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr class="calendar-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr class="calendar-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-
     <div class="container">
-        <div class="events"></div>
-        <div class="event">
-            <button id="eventBtn">Add Event</button>
-            <div id="eventModal" class="modal">
-                <div class="event-content">
-                    <div class="event-header">
-                        <h3>Event Title</h3>
-                        <button type="button" id="modal-close-btn" class="btn-close" aria-label="Close"></button>
-                    </div>
-                    <div class="event-body">
-                        <input type="text" id="event-type" class="form-control" placeholder="Event Title">
-                    </div>
-                    <div class="event-time row">
-                        <div class="col">
-                            <input type="date" id="event-date" class="form-control">
+
+
+        <table id="calendar">
+            <tr id="calendar-header">
+                <th><button id="calendar-prev" class="btn btn-primary">&lt;</button></th>
+                <th id="current-month" colspan="5">Month 20XX</th>
+                <th><button id="calendar-next" class="btn btn-primary">&gt;</button></th>
+            </tr>
+            <tr id="calendar-days">
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+            <tr class="calendar-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="calendar-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="calendar-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="calendar-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="calendar-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="display event">  
+            <div class="postion-absolute top-50 start-50 translate middle">
+            <h1>Today's Events</h1>
+        <ul class="list-group">
+        <li class="list-group-item active" aria-current="true">1.</li>
+        <li class="list-group-item">2.</li>
+        </ul>
+        </div>
+        <div class="container">
+            <div class="events"></div>
+            <div class="event">
+                <button id="eventBtn">Add Event</button>
+                <div id="eventModal" class="modal">
+                    <div class="event-content">
+                        <div class="event-header">
+                            <h3>Event Title</h3>
+                            <button type="button" id="modal-close-btn" class="btn-close" aria-label="Close"></button>
                         </div>
-                        <div class="col">
-                            <input type="time" id="event-time" class="form-control">
+                        <div class="event-body">
+                            <input type="text" id="event-type" class="form-control" placeholder="Event Title">
+                        </div>
+                        <div class="event-time row">
+                            <div class="col">
+                                <input type="date" id="event-date" class="form-control">
+                            </div>
+                            <div class="col">
+                                <input type="time" id="event-time" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>

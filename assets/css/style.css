@@ -36,3 +36,9 @@
     text-decoration: none;
     cursor: pointer;
 }
+h1 {
+    font-style: italic;
+    font-family: cursive;
+    text-shadow: #aaa;
+   
+}
