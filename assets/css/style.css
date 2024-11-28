@@ -37,8 +37,12 @@
     cursor: pointer;
 }
 h1 {
-    font-style: italic;
-    font-family: cursive;
-    text-shadow: #aaa;
+    font-style:normal;
+    text:#aaa;
+    
+    
    
+}
+.display-event {
+    box-shadow:5px 5px 5px 5px lightgrey;
 }
