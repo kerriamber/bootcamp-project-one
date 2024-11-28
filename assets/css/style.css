@@ -44,4 +44,6 @@ h1 {
 
 .display-event {
     box-shadow:5px 5px 5px 5px lightgrey;
+    background-color: rgb(147, 163, 165);
 }
+
