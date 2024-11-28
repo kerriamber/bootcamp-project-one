@@ -203,3 +203,13 @@ document.getElementById("event-save").addEventListener("click", () => {
         alert("Please fill out all fields");
     }
 });
+
+//function to add events to Today's Events List
+let todayEvents = document.getElementById("event-list");
+
+function addEventToList() {
+    let eventList = document.createElement("li");
+    let event = document.querySelector(".current-day .event");
+    eventList.innerText = event.innerText;
+    todayEvents.appendChild(eventList);
+}
