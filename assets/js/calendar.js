@@ -184,3 +184,22 @@ modalCloseBtn.addEventListener("click", () => {
     document.getElementById("event-time").value = "";
 });
 
+//function to save event
+document.getElementById("event-save").addEventListener("click", () => {
+    const eventType = document.getElementById("event-type").value;
+    const eventTime = document.getElementById("event-time").value;
+
+    if (eventType && eventTime) {
+        const event = document.createElement("div");
+        event.classList.add("event");
+        event.innerHTML = `<strong>${eventType}</strong> - @ ${eventTime}`;
+
+        document.querySelector(".current-day").appendChild(event);
+
+        eventModal.style.display = "none";
+        document.getElementById("event-type").value = "";
+        document.getElementById("event-time").value = "";
+    } else {
+        alert("Please fill out all fields");
+    }
+});
