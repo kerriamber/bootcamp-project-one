@@ -7,7 +7,9 @@
     display: flex;
     border-radius: 10px;
     background-color: rgba(250, 54, 97, 0.766);
+    background-image: url(https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNhdHxlbnwwfHwwfHx8MA%3D%3D);
 }
+
 
 .body {
     position: relative;
@@ -156,4 +158,12 @@
 #modal-close-btn {
     float: right;
     margin-left: 380px;
+}
+.col {
+    background-color: rgb(50, 50, 163);
+}
+.event {
+    position: relative;
+    top: 75%;
+    left: 35%;
 }

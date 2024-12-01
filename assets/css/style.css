@@ -44,4 +44,8 @@ h1 {
 
 .display-event {
     box-shadow:5px 5px 5px 5px lightgrey;
+    background-color: #aaa;
+}
+.col {
+    background-image: image(https://classroomclipart.com/image/vector-clipart/icon-style-cat-simple-drawing-59011.htm);
 }
