@@ -264,6 +264,11 @@ document.getElementById("event-save").addEventListener("click", () => {
 
     if (eventType && eventTime) {
         const currentDay = calendar.querySelector(".current-day");
+
+        if (!currentDay.classList.contains("has-event")) {
+            currentDay.classList.add("has-event");
+        }
+        
         storeEvent(
             currentDay.dataset.year,
             currentDay.dataset.month,
