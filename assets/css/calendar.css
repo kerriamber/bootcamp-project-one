@@ -7,7 +7,7 @@
     display: flex;
     border-radius: 10px;
     background-color: rgba(250, 54, 97, 0.766);
-    background-image: url(https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNhdHxlbnwwfHwwfHx8MA%3D%3D);
+    background-image: url("https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNhdHxlbnwwfHwwfHx8MA%3D%3D");
     background-size:475px 900px;
 }
 
@@ -87,6 +87,10 @@
 }
 
 .calendar-row td:hover {
+    background-color: #00f;
+}
+
+.calendar-row td.has-event {
     background-color: #00f;
 }
 
