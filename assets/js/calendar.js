@@ -179,6 +179,9 @@ calendarDays.forEach((dayCell) => {
     });
 });
 
+/**
+ * Utility function to reset the event modal and hide it
+ */
 function resetEventModal() {
     eventModal.style.display = "none";
     document.getElementById("event-type").value = "";
@@ -195,10 +198,10 @@ modalCloseBtn.addEventListener("click", resetEventModal);
 
 /**
  * Utility function to clear all events from localStorage
+ * TODO: overload to clear events from a specified day
  */
 function clearSavedEvents() {
     localStorage.removeItem("events");
-    renderEventLog();
 }
 
 /**
@@ -210,6 +213,14 @@ function getSavedEvents() {
     return events ? JSON.parse(events) : [];
 }
 
+/**
+ * Store an event in localStorage
+ * @param {*} year year of event
+ * @param {*} month month of event
+ * @param {*} date date of event
+ * @param {*} time time of event
+ * @param {*} title title of event
+ */
 function storeEvent(year, month, date, time, title) {
     const events = getSavedEvents();
     events.push({
@@ -223,6 +234,13 @@ function storeEvent(year, month, date, time, title) {
     localStorage.setItem("events", JSON.stringify(events));
 }
 
+/**
+ * Get events for the given date
+ * @param {*} year 
+ * @param {*} month 
+ * @param {*} date 
+ * @returns {Array} an array of events for the given date
+ */
 function getEventsByDate(year, month, date) {
     const events = getSavedEvents();
 
@@ -234,6 +252,13 @@ function getEventsByDate(year, month, date) {
     });
 }
 
+/**
+ * Checks if there are any events for the given date
+ * @param {*} year year to check
+ * @param {*} month month to check
+ * @param {*} date date to check
+ * @returns {boolean} true if there are events for the given date, false otherwise
+ */
 function dateHasEvents(year, month, date) {
     return getEventsByDate(year, month, date).length > 0;
 }
@@ -268,7 +293,7 @@ document.getElementById("event-save").addEventListener("click", () => {
         if (!currentDay.classList.contains("has-event")) {
             currentDay.classList.add("has-event");
         }
-        
+
         storeEvent(
             currentDay.dataset.year,
             currentDay.dataset.month,
@@ -276,8 +301,8 @@ document.getElementById("event-save").addEventListener("click", () => {
             eventTime,
             eventType
         );
+
         renderEventLog();
-        // reset event modal
         resetEventModal();
     } else {
         alert("Please fill out all fields");
