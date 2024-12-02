@@ -183,6 +183,39 @@ modalCloseBtn.addEventListener("click", () => {
     document.getElementById("event-date").value = "";
     document.getElementById("event-time").value = "";
 });
+// local storage
+//will need to parse out any items already in local storage 
+// will need to be able to add new items into local storage while not replacing what is there
+// will need to have an event listener function so that it knows to add to local storage when event is saved
+const eventlog = [
+    {
+        id: 
+        title,
+        date,
+        time,
+     }
+]
+function addEvent(title, date, time) {
+    const newEvent = {
+        id:eventlog.length +1,
+        title,
+        date,
+        time,
+    };
+    eventlog.push(newEvent)
+    rendereventlog();
+    }
+function renderEventLog() {
+    const logContainer =document.getElementById(`event-log`);
+    logContainer.innerHTML = '';
+
+    eventlog.forEach(event => {
+        const eventEntry = document.createElement('div');
+        eventEntry.textContent = '${event.date} ${event.time}: ${event.title}';
+        logContainer.appendchild(evententry);
+
+    });
+}
 
 //function to save event
 document.getElementById("event-save").addEventListener("click", () => {
