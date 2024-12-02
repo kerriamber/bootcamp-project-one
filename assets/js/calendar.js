@@ -217,3 +217,24 @@ function renderEventLog() {
     });
 }
 
+//function to save event
+document.getElementById("event-save").addEventListener("click", () => {
+    const eventType = document.getElementById("event-type").value;
+    const eventTime = document.getElementById("event-time").value;
+    const todayEvents = document.getElementById("event-list");
+
+    if (eventType && eventTime) {
+        // create event element in the event list
+        const event = document.createElement("li");
+        event.classList.add("list-group-item");
+        event.innerHTML = `<strong>${eventType}</strong> - @ ${eventTime}`;
+        todayEvents.appendChild(event);
+
+        // reset event modal
+        eventModal.style.display = "none";
+        document.getElementById("event-type").value = "";
+        document.getElementById("event-time").value = "";
+    } else {
+        alert("Please fill out all fields");
+    }
+});

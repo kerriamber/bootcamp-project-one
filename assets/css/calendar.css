@@ -1,21 +1,88 @@
-#calendar {
-    text-align: center;
+.container {
+    position: relative;
+    width: 1200px;
+    min-height: 850px;
+    margin: 0 auto;
+    padding: 5px;
+    display: flex;
+    border-radius: 10px;
+    background-color: rgba(250, 54, 97, 0.766);
+    background-image: url(https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNhdHxlbnwwfHwwfHx8MA%3D%3D);
+    background-size:475px 900px;
 }
 
-#calendar-header, #calendar-days th, .calendar-row td {
-    border: 4px solid #000;
+
+.body {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
+    background-color: #e2e1dc;
+}
+
+#calendar-prev {
+    background-color: rgba(250, 54, 97, 0.766);
+    border-color: rgba(250, 54, 97, 0.766);
+}
+
+#calendar-next {
+    background-color: rgba(250, 54, 97, 0.766);
+    border-color: rgba(250, 54, 97, 0.766);
+}
+
+#calendar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;  
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #373c4f;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+#calendar #current-month {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+#calendar #calendar-days {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.calendar-row td {
+    border: 2px solid #000;
 }
 
 #calendar-header, #calendar-days {
-    background-color: #000;
-    color: #fff;
+    color: black;
+    text-transform: bold;
 }
 
 .calendar-row td {
     width: 100px;
     height: 100px;
     font-weight: bolder;
-    background-color: gray;
+    background-color: #fff;
     position: relative;
 }
 
@@ -24,15 +91,15 @@
 }
 
 .calendar-row td.current-day {
-    background-color: #52be72;
+    background-color: rgba(250, 54, 97, 0.766);
 }
 
 .inactive-month {
-    color: #f00;
+    color: #aaa;
 }
 
 .active-month {
-    color: #0f0;
+    color: black;
 }
 
 .calendar-date {
@@ -42,6 +109,12 @@
     padding: 10px;
     border-bottom: 4px solid #000;
     border-right: 4px solid #000;
+}
+
+#todays-events {
+    color: white;
+    border-radius: 5px;
+    border-color: #000;
 }
 
 #eventModal {
@@ -77,4 +150,21 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#eventModal h3 {
+    text-align: left;
+}
+
+#modal-close-btn {
+    float: right;
+    margin-left: 380px;
+}
+.col {
+    background-color: rgb(50, 50, 163);
+}
+.event {
+    position: relative;
+    top: 75%;
+    left: 35%;
 }
