@@ -61,10 +61,12 @@ function renderCalendar(monthIndex, year) {
         // Clear the contents of the cell
         dayCell.innerHTML = "";
 
-        // clear .current-day if it's there, since we're rendering the calendar again
-        if (dayCell.classList.contains("current-day")) {
-            dayCell.classList.remove("current-day");
-        }
+        // clear any classes that might be there from a previous rendering
+        dayCell.classList = [];
+
+        dayCell.dataset.year = date.getFullYear();
+        dayCell.dataset.month = date.getMonth();
+        dayCell.dataset.date = date.getDate();
 
         const dateSpan = document.createElement("span");
         dateSpan.classList.add("calendar-date");
@@ -106,6 +108,7 @@ function renderCalendar(monthIndex, year) {
         if (shouldPreselectDay && !currentDayAlreadySelected) {
             currentDayAlreadySelected = true; // don't add .current-day to any other cells
             dayCell.classList.add("current-day");
+            renderEventLog();
         }
 
         // Pad the date with a leading zero if necessary (because it looks nicer [and I hate CSS])
@@ -118,6 +121,10 @@ function renderCalendar(monthIndex, year) {
         dateSpan.innerText = currentDate;
 
         dayCell.appendChild(dateSpan);
+
+        if (dateHasEvents(date.getFullYear(), date.getMonth(), date.getDate())) {
+            dayCell.classList.add("has-event");
+        }
 
         // Increment the date by one day
         date = new Date(date.getTime() + ONE_DAY_IN_MILLISECONDS);
@@ -168,8 +175,15 @@ calendarDays.forEach((dayCell) => {
         }
 
         this.classList.add("current-day");
+        renderEventLog();
     });
 });
+
+function resetEventModal() {
+    eventModal.style.display = "none";
+    document.getElementById("event-type").value = "";
+    document.getElementById("event-time").value = "";
+}
 
 //function to add event
 addEventBtn.addEventListener("click", () => {
@@ -177,43 +191,69 @@ addEventBtn.addEventListener("click", () => {
 });
 
 //function to close event modal
-modalCloseBtn.addEventListener("click", () => {
-    eventModal.style.display = "none";
-    document.getElementById("event-type").value = "";
-    document.getElementById("event-date").value = "";
-    document.getElementById("event-time").value = "";
-});
-// local storage
-//will need to parse out any items already in local storage 
-// will need to be able to add new items into local storage while not replacing what is there
-// will need to have an event listener function so that it knows to add to local storage when event is saved
-const eventlog = [
-    {
-        id: 
-        title,
-        date,
-        time,
-     }
-]
-function addEvent(title, date, time) {
-    const newEvent = {
-        id:eventlog.length +1,
-        title,
-        date,
-        time,
-    };
-    eventlog.push(newEvent)
-    rendereventlog();
-    }
+modalCloseBtn.addEventListener("click", resetEventModal);
+
+/**
+ * Utility function to clear all events from localStorage
+ */
+function clearSavedEvents() {
+    localStorage.removeItem("events");
+    renderEventLog();
+}
+
+/**
+ * Get all events from localStorage
+ * @returns {Array} an array of events
+ */
+function getSavedEvents() {
+    const events = localStorage.getItem("events");
+    return events ? JSON.parse(events) : [];
+}
+
+function storeEvent(year, month, date, time, title) {
+    const events = getSavedEvents();
+    events.push({
+        year: year,
+        month: month,
+        date: date,
+        time: time,
+        title: title
+    });
+
+    localStorage.setItem("events", JSON.stringify(events));
+}
+
+function getEventsByDate(year, month, date) {
+    const events = getSavedEvents();
+
+    return events.filter(event => {
+        // Use == instead of === for the type conversion, since JSON.parse doesn't turn stuff back into primatives from strings
+        return event.year == year &&
+            event.month == month &&
+            event.date == date
+    });
+}
+
+function dateHasEvents(year, month, date) {
+    return getEventsByDate(year, month, date).length > 0;
+}
+
 function renderEventLog() {
-    const logContainer =document.getElementById(`event-log`);
+    const logContainer = document.getElementById("event-list"),
+        currentDay = calendar.querySelector(".current-day");
+
     logContainer.innerHTML = '';
 
-    eventlog.forEach(event => {
-        const eventEntry = document.createElement('div');
-        eventEntry.textContent = '${event.date} ${event.time}: ${event.title}';
-        logContainer.appendchild(evententry);
+    const todaysEvents = getEventsByDate(
+        currentDay.dataset.year,
+        currentDay.dataset.month,
+        currentDay.dataset.date
+    );
 
+    todaysEvents.forEach(event => {
+        const eventEntry = document.createElement("li");
+        eventEntry.textContent = `${event.time}: ${event.title}`;
+        logContainer.appendChild(eventEntry);
     });
 }
 
@@ -221,19 +261,19 @@ function renderEventLog() {
 document.getElementById("event-save").addEventListener("click", () => {
     const eventType = document.getElementById("event-type").value;
     const eventTime = document.getElementById("event-time").value;
-    const todayEvents = document.getElementById("event-list");
 
     if (eventType && eventTime) {
-        // create event element in the event list
-        const event = document.createElement("li");
-        event.classList.add("list-group-item");
-        event.innerHTML = `<strong>${eventType}</strong> - @ ${eventTime}`;
-        todayEvents.appendChild(event);
-
+        const currentDay = calendar.querySelector(".current-day");
+        storeEvent(
+            currentDay.dataset.year,
+            currentDay.dataset.month,
+            currentDay.dataset.date,
+            eventTime,
+            eventType
+        );
+        renderEventLog();
         // reset event modal
-        eventModal.style.display = "none";
-        document.getElementById("event-type").value = "";
-        document.getElementById("event-time").value = "";
+        resetEventModal();
     } else {
         alert("Please fill out all fields");
     }
