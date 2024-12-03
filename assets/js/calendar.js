@@ -205,6 +205,38 @@ function clearSavedEvents() {
 }
 
 /**
+ * Compare two events
+ * @param {*} eventA 
+ * @param {*} eventB 
+ * @returns a negative value if eventA should be sorted before eventB, a positive value if eventA should be sorted after eventB, and 0 if both events are exactly alike
+ */
+function compareEvents(eventA, eventB) {
+    // Parse the time into hours and minutes so we can do some numerical logic
+    const [eventAHours, eventAMinutes] = eventA.time.split(':').map(n => parseInt(n));
+    const [eventBHours, eventBMinutes] = eventB.time.split(':').map(n => parseInt(n));
+
+    if (eventAHours < eventBHours) {
+        return -1;
+    }
+
+    if (eventAHours > eventBHours) {
+        return 1;
+    }
+
+    if (eventAHours == eventBHours) {
+        if (eventAMinutes == eventBMinutes) {
+            // if the two times are the same for event a and event b, sort by event title
+            return eventA.title.localeCompare(eventB.title);
+        }
+
+        // hour is same for both events, sort by minutes
+        return eventAMinutes - eventBMinutes;
+    }
+
+    // events are exactly the same
+    return 0;
+}
+/**
  * Get all events from localStorage
  * @returns {Array} an array of events
  */
@@ -239,7 +271,7 @@ function storeEvent(year, month, date, time, title) {
  * @param {*} year 
  * @param {*} month 
  * @param {*} date 
- * @returns {Array} an array of events for the given date
+ * @returns {Array} a sorted array of events for the given date
  */
 function getEventsByDate(year, month, date) {
     const events = getSavedEvents();
@@ -249,7 +281,7 @@ function getEventsByDate(year, month, date) {
         return event.year == year &&
             event.month == month &&
             event.date == date
-    });
+    }).sort(compareEvents);
 }
 
 /**
@@ -277,6 +309,7 @@ function renderEventLog() {
 
     todaysEvents.forEach(event => {
         const eventEntry = document.createElement("li");
+        eventEntry.classList.add('list-group-item');
         eventEntry.textContent = `${event.time}: ${event.title}`;
         logContainer.appendChild(eventEntry);
     });
