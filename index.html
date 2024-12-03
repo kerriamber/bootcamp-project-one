@@ -26,7 +26,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-lg">
                 <table id="calendar">
                     <tr id="calendar-header">
                         <th><button id="calendar-prev" class="btn btn-primary">&lt;</button></th>
@@ -89,42 +89,46 @@
                     </tr>
                 </table>
             </div>
-            <div class="col">
+            <div class="col-lg">
                 <div class="display-event">
                     <div id="todays-events">
                         <h1>Today's Events</h1>
                         <ul id="event-list" class="list-group">
                         </ul>
-                    </div
-                    
-                            <div class="events"></div>
-                            <div class="event">
-                                <button id="eventBtn" type="button" class="btn btn-primary">Add Event</button>
-                                <div id="eventModal" class="modal" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h3 class="modal-title">New Event</h3>
-                                            <button type="button" id="modal-close-btn" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                    </div>
+
+                    <div class="events"></div>
+                    <div class="event">
+                        <button id="eventBtn" type="button" class="btn btn-primary">Add Event</button>
+                        <div id="eventModal" class="modal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">New Event</h3>
+                                        <button type="button" id="modal-close-btn" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="text" id="event-type" class="form-control"
+                                            placeholder="Event Title">
+                                    </div>
+                                    <div class="event-time row">
+                                        <div class="col">
+                                            <input type="time" id="event-time" class="form-control">
                                         </div>
-                                        <div class="modal-body">
-                                            <input type="text" id="event-type" class="form-control" placeholder="Event Title">
-                                        </div>
-                                        <div class="event-time row">
-                                            <div class="col">
-                                                <input type="time" id="event-time" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" id="event-save" class="btn btn-primary">Save</button>
-                                        </div>
-                                        </div> 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="event-save" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>
