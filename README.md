@@ -22,6 +22,10 @@ Easy to use calandar that allows you to add and track events on different days o
 
 
 
+## Demo
+
+https://kerriamber.github.io/bootcamp-project-one/
+
 ## Tech Used
 -Bootstrap CSS
 
