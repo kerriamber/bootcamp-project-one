@@ -307,6 +307,13 @@ function renderEventLog() {
         currentDay.dataset.date
     );
 
+    if (todaysEvents.length === 0) {
+        document.getElementById("no-events").style.display = "block";
+        return;
+    } else {
+        document.getElementById("no-events").style.display = "none";
+    }
+    
     todaysEvents.forEach(event => {
         const eventEntry = document.createElement("li");
         eventEntry.classList.add('list-group-item');
