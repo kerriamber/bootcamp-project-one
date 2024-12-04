@@ -18,7 +18,7 @@ Easy to use calandar that allows you to add and track events on different days o
 
 ## Screenshots
 
-![image alt](https://github.com/kerriamber/bootcamp-project-one/blob/d04d861fb4d6f0a9b4505d97ba48e8d5906dc60b/catboi%20calendar%20screenshot.png)
+![image alt](https://github.com/kerriamber/bootcamp-project-one/blob/1976cfe08c367c9e6742b1d6e84c9d061cf071c3/catboi%20calendar%20screenshot%20revised.png)
 
 
 
